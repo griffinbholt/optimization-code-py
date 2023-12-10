@@ -67,5 +67,3 @@ def example_2_6():
     with tf.GradientTape() as tape:
         z = f(x, y)
     print([deriv.numpy() for deriv in tape.gradient(z, [x, y])])
-
-example_2_5()
