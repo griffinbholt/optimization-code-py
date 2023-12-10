@@ -38,7 +38,7 @@ If you encounter any issues or have pressing comments, please [file an issue](ht
 | 20 | 0% | 0% | Nothing written |
 | 21 | 0% | 0% | Nothing written |
 
-I have also written code for pertinent figures, examples, exercises through Chapter 3.
+I have also written code for pertinent figures, examples, exercises through Chapter 4.
 
 <!-- TODO - I need to go through and check that all functions have proper parameter
 and return signatures. -->
