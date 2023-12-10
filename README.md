@@ -1,6 +1,6 @@
-# decisionmaking-code-py
+# optimization-code-py
 
-[![Python package](https://github.com/griffinbholt/decisionmaking-code-py/actions/workflows/python-package.yml/badge.svg)](https://github.com/griffinbholt/decisionmaking-code-py/actions/workflows/python-package.yml)
+[![Python package](https://github.com/griffinbholt/optimization-code-py/actions/workflows/python-package.yml/badge.svg)](https://github.com/griffinbholt/optimization-code-py/actions/workflows/python-package.yml)
 
 *Original Julia Code by: Mykel Kochenderfer and Tim Wheeler*
 
@@ -38,7 +38,7 @@ If you encounter any issues or have pressing comments, please [file an issue](ht
 | 20 | 0% | 0% | Nothing written |
 | 21 | 0% | 0% | Nothing written |
 
-<!-- I have also written code for pertinent examples and exercises through Chapter 11. -->
+I have also written code for pertinent figures, examples, exercises through Chapter 2.
 
 <!-- TODO - I need to go through and check that all functions have proper parameter
 and return signatures. -->
