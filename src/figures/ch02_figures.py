@@ -34,6 +34,7 @@ def figure_2_4():
     plt.xscale("log")
     plt.yscale("log")
     plt.legend()
+    plt.title("Figure 2.4")
     plt.show()
 
 figure_2_4()

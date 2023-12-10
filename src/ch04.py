@@ -2,11 +2,14 @@
 
 import cvxpy as cp
 import numpy as np
+import warnings
 
 from scipy.optimize import brent
 from typing import Callable
 
 from ch03 import bracket_minimum
+
+warnings.simplefilter(action='ignore', category=FutureWarning)
 
 
 def line_search(f: Callable[[np.ndarray], float],

@@ -419,5 +419,3 @@ michalewicz = MichalewiczFunction()
 rosenbrock = RosenbrockFunction()
 wheeler = WheelersRidge()
 circle = CircleFunction()
-
-michalewicz.plot()
