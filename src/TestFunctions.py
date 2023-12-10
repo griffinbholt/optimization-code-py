@@ -35,23 +35,47 @@ class AckleysFunction(ScalarValuedTestFunction):
     def __call__(self, x: np.ndarray, a: float = 20, b: float = 0.2, c: float = 2*np.pi) -> float:
         """Ackley's function with d-dimensional input vector `x` and three optional parameters."""
         d = len(x)
-        return -a*np.exp(-b*np.sqrt(np.sum(x**2)/d)) - np.exp(np.sum(np.cos(c*x))/d) + a + self.EXP1
+        tmp = b / np.sqrt(d)
+        norm = np.linalg.norm(x, axis=0)
+        return -a*np.exp(-tmp * norm) - np.exp(np.sum(np.cos(c*x), axis=0)/d) + a + self.EXP1
 
     def grad(self, x: np.ndarray, a: float = 20, b: float = 0.2, c: float = 2*np.pi) -> np.ndarray:
         d = len(x)
-        sqrt_sum_sq = np.sqrt(np.sum(x**2)/d)
-        part_1 = x * ((a * b * np.exp(-b * sqrt_sum_sq)) / (d * sqrt_sum_sq))
-        part_2 = np.sin(c*x) * ((c * np.exp(np.sum(np.cos(c*x))/d)) / d)
+        tmp = b / np.sqrt(d)
+        norm = np.linalg.norm(x)
+        part_1 = x * (((a*tmp) * np.exp(-tmp * norm)) / norm)
+        part_2 = np.sin(c*x) * (c/d) * np.exp(np.sum(np.cos(c*x))/d)
         return part_1 + part_2
 
     def hess(self, x: np.ndarray, a: float = 20, b: float = 0.2, c: float = 2*np.pi) -> np.ndarray:
-        raise NotImplementedError  # TODO (eventually... someday... maybe...)
+        d = len(x)
+        tmp = b / np.sqrt(d)
+        norm = np.linalg.norm(x)
+        part_1 = ((-a*tmp) * np.exp(-tmp * norm) * ((1 / norm) + tmp)) / np.dot(x, x)
+        part_2 = -((c/d)**2) * np.exp(np.sum(np.cos(c*x))/d)
+        sin_cx = np.sin(c*x)
+        return part_1 * np.outer(x, x) + part_2 * np.outer(sin_cx, sin_cx)
 
     def global_min(self, d: int, a: float = 20, b: float = 0.2, c: float = 2*np.pi) -> tuple[float, np.ndarray]:
         return 0.0, np.zeros(d)
 
     def plot(self):
-        raise NotImplementedError  # TODO - Plot doesn't work
+        f_min, x_min = self.global_min(d=2)
+        lim = (-30.1, 30.1)
+        zlim = (-1, 30)
+        stride = 0.01
+        levels = [i for i in range(25)]
+        fig = plt.figure(figsize=(15, 5))
+        surf_ax = plot_surface(fig, self, lim, lim, zlim, stride, stride, subplot_coords=(1,3,1))
+        surf_ax.scatter([x_min[0]], [x_min[1]], [f_min], c='black', s=0.5)
+        surf_ax.view_init(azim=-60)
+        contf_ax = plot_contour(fig, self, lim, lim, stride, stride, levels=levels, filled=True, subplot_coords=(1,3,2))
+        contf_ax.scatter([x_min[0]], [x_min[1]], c='black', s=0.5)
+        cont_ax = plot_contour(fig, self, lim, lim, stride, stride, levels=levels, subplot_coords=(1,3,3))
+        cont_ax.scatter([x_min[0]], [x_min[1]], c='black', s=0.5)
+        plt.suptitle("Ackley's Function")
+        plt.subplots_adjust(wspace=0.5)
+        plt.show()
 
 
 class BoothsFunction(ScalarValuedTestFunction):
@@ -168,7 +192,7 @@ class BraninFunction(ScalarValuedTestFunction):
 class FlowerFunction(ScalarValuedTestFunction):
     def __call__(self, x: np.ndarray, a: float = 1, b: float = 1, c: float = 4) -> float:
         """The flower function with two-dimensional input vector `x` and three optional parameters."""
-        return a * np.linalg.norm(x) + b * np.sin(c * np.arctan2(x[1], x[0]))
+        return a * np.linalg.norm(x, axis=0) + b * np.sin(c * np.arctan2(x[1], x[0]))
 
     def grad(self, x: np.ndarray, a: float = 1, b: float = 1, c: float = 4) -> np.ndarray:
         norm = np.linalg.norm(x)
@@ -192,7 +216,18 @@ class FlowerFunction(ScalarValuedTestFunction):
         return None, None  # NOTE: The Flower function has no global minimum
 
     def plot(self):
-        raise NotImplementedError  # TODO - Doesn't plot yet
+        lim = (-3.1, 3.1)
+        zlim = (0, 6)
+        stride = 0.01
+        levels = np.arange(-0.1, 5, 0.5)
+        fig = plt.figure(figsize=(15, 5))
+        surf_ax = plot_surface(fig, self, lim, lim, zlim, stride, stride, subplot_coords=(1,3,1))
+        surf_ax.view_init(elev=45, azim=-60)
+        plot_contour(fig, self, lim, lim, stride, stride, levels=levels, filled=True, subplot_coords=(1,3,2))
+        plot_contour(fig, self, lim, lim, stride, stride, levels=levels, subplot_coords=(1,3,3))
+        plt.suptitle("Flower Function")
+        plt.subplots_adjust(wspace=0.5)
+        plt.show()
 
 
 class MichalewiczFunction(ScalarValuedTestFunction):
@@ -201,10 +236,13 @@ class MichalewiczFunction(ScalarValuedTestFunction):
     """The Michalewicz function with input vector `x` and optional steepness parameter `m`."""
     def __call__(self, x: np.ndarray, m: float = 10) -> float:
         i = np.arange(len(x)) + 1
-        inner = (i*(x**2)) / np.pi
+        if len(x.shape) == 3:
+            inner = (i[:,None,None]*(x**2)) / np.pi
+        else:
+            inner = (i*(x**2)) / np.pi
         sin_inner = np.sin(inner)
         exp = 2*m
-        return -np.sum(np.sin(x)*(sin_inner**exp))
+        return -np.sum(np.sin(x)*(sin_inner**exp), axis=0)
 
     def grad(self, x: np.ndarray, m: float = 10) -> np.ndarray:
         i = np.arange(len(x)) + 1
@@ -223,7 +261,22 @@ class MichalewiczFunction(ScalarValuedTestFunction):
         return f, x
 
     def plot(self):
-        raise NotImplementedError  # TODO - Could not be plotted as is
+        f_min, x_min = self.global_min()
+        lim = (-0.1, 4.1)
+        zlim = (-2, 1.2)
+        stride = 0.01
+        levels = np.arange(-2, 1.2, 0.1)
+        fig = plt.figure(figsize=(15, 5))
+        surf_ax = plot_surface(fig, self, lim, lim, zlim, stride, stride, subplot_coords=(1,3,1))
+        surf_ax.scatter([x_min[0]], [x_min[1]], [f_min], c='black', s=0.5)
+        surf_ax.view_init(azim=-70)
+        contf_ax = plot_contour(fig, self, lim, lim, stride, stride, levels=levels, filled=True, subplot_coords=(1,3,2))
+        contf_ax.scatter([x_min[0]], [x_min[1]], c='black', s=0.5)
+        cont_ax = plot_contour(fig, self, lim, lim, stride, stride, levels=levels, subplot_coords=(1,3,3))
+        cont_ax.scatter([x_min[0]], [x_min[1]], c='black', s=0.5)
+        plt.suptitle("Michalewicz Function")
+        plt.subplots_adjust(wspace=0.5)
+        plt.show()
 
 
 class RosenbrockFunction(ScalarValuedTestFunction):
@@ -368,3 +421,5 @@ michalewicz = MichalewiczFunction()
 rosenbrock = RosenbrockFunction()
 wheeler = WheelersRidge()
 circle = CircleFunction()
+
+michalewicz.plot()
