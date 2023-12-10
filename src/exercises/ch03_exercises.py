@@ -18,5 +18,3 @@ def exercise_3_4():
         else:
             b = x
         print("Iteration " + str(i + 1) + ": ", (a, b))
-
-exercise_3_4()

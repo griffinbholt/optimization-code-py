@@ -3,7 +3,7 @@
 import cvxpy as cp
 import numpy as np
 
-from scipy.optimize import brentq
+from scipy.optimize import brent
 from typing import Callable
 
 from ch03 import bracket_minimum
@@ -12,7 +12,7 @@ from ch03 import bracket_minimum
 def line_search(f: Callable[[np.ndarray], float],
                 x: np.ndarray,
                 d: np.ndarray,
-                minimize: Callable[[Callable, float, float], float] = lambda f,a,b: brentq(f, a, b)[0]
+                minimize: Callable[[Callable, float, float], float] = lambda f,a,b: brent(f, brack=(a, b))
                 ) -> np.ndarray:
     """
     A method for conducting a line search, which finds the optimal step factor
@@ -22,6 +22,7 @@ def line_search(f: Callable[[np.ndarray], float],
     """
     def objective(alpha): return f(x + alpha*d)
     a, b = bracket_minimum(objective)
+    print((a, b))
     alpha = minimize(objective, a, b)
     return x + alpha*d
 
