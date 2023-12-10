@@ -4,6 +4,7 @@ import numpy as np
 
 from ch02 import diff_forward, diff_central, diff_backward, diff_complex
 
+
 class TestFiniteDifferenceMethods():
     tol = 1e-7
     
