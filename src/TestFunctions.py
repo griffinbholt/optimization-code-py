@@ -30,14 +30,12 @@ class ScalarValuedTestFunction(ABC):
 
 
 class AckleysFunction(ScalarValuedTestFunction):
-    EXP1 = np.exp(1)
-
     def __call__(self, x: np.ndarray, a: float = 20, b: float = 0.2, c: float = 2*np.pi) -> float:
         """Ackley's function with d-dimensional input vector `x` and three optional parameters."""
         d = len(x)
         tmp = b / np.sqrt(d)
         norm = np.linalg.norm(x, axis=0)
-        return -a*np.exp(-tmp * norm) - np.exp(np.sum(np.cos(c*x), axis=0)/d) + a + self.EXP1
+        return -a*np.exp(-tmp * norm) - np.exp(np.sum(np.cos(c*x), axis=0)/d) + a + np.e
 
     def grad(self, x: np.ndarray, a: float = 20, b: float = 0.2, c: float = 2*np.pi) -> np.ndarray:
         d = len(x)
