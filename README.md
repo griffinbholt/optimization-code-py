@@ -17,7 +17,7 @@ If you encounter any issues or have pressing comments, please [file an issue](ht
 | Chapter(s) | Written | Tested | Notes |
 |--:|:--|:--|:--|
 |  1 | N/A | N/A | No code blocks in this chapter |
-|  2 | ▌▌▌▌▌▌▌▌▌▌ 100% | 0% | Needs to be tested |
+|  2 | ▌▌▌▌▌▌▌▌▌▌ 100% | ▌▌▌▌▌▌▌▌▌▌ 100% | **Ready for use** |
 |  3 | 0% | 0% | Nothing written |
 |  4 | 0% | 0% | Nothing written |
 |  5 | 0% | 0% | Nothing written |
