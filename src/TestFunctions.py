@@ -1,11 +1,35 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
+from abc import ABC, abstractmethod
+
 from convenience import plot_surface, plot_contour
 
 # TODO - Think about having default values available through the class
 
-class AckleysFunction():
+class ScalarValuedTestFunction(ABC):
+    @abstractmethod
+    def __call__(self, x: np.ndarray, *args, **kwargs) -> float:
+        pass
+
+    @abstractmethod
+    def grad(self, x: np.ndarray, *args, **kwargs) -> np.ndarray:
+        pass
+
+    @abstractmethod
+    def hess(self, x: np.ndarray, *args, **kwargs) -> np.ndarray:
+        pass
+
+    @abstractmethod
+    def global_min(self, *args, **kwargs) -> tuple[float, np.ndarray]:
+        pass
+
+    @abstractmethod
+    def plot(self):
+        pass
+
+
+class AckleysFunction(ScalarValuedTestFunction):
     EXP1 = np.exp(1)
 
     def __call__(self, x: np.ndarray, a: float = 20, b: float = 0.2, c: float = 2*np.pi) -> float:
@@ -30,7 +54,7 @@ class AckleysFunction():
         raise NotImplementedError  # TODO - Plot doesn't work
 
 
-class BoothsFunction():
+class BoothsFunction(ScalarValuedTestFunction):
     H = np.array([[10.0, 8.0], [8.0, 10.0]])
     F_MIN = 0.0
     X_MIN = np.array([1.0, 3.0])
@@ -70,7 +94,7 @@ class BoothsFunction():
         plt.show()
 
 
-class BraninFunction():
+class BraninFunction(ScalarValuedTestFunction):
     X1_MIN = np.pi * np.array([-1.0, 1.0, 3.0, 5.0])  # x1 = pi + 2*pi*m for integral m
 
     def __call__(self, 
@@ -141,7 +165,7 @@ class BraninFunction():
         plt.show()
 
 
-class FlowerFunction():
+class FlowerFunction(ScalarValuedTestFunction):
     def __call__(self, x: np.ndarray, a: float = 1, b: float = 1, c: float = 4) -> float:
         """The flower function with two-dimensional input vector `x` and three optional parameters."""
         return a * np.linalg.norm(x) + b * np.sin(c * np.arctan2(x[1], x[0]))
@@ -171,7 +195,7 @@ class FlowerFunction():
         raise NotImplementedError  # TODO - Doesn't plot yet
 
 
-class MichalewiczFunction():
+class MichalewiczFunction(ScalarValuedTestFunction):
     X_MIN_M10 = np.array([2.2029, np.pi/2])
 
     """The Michalewicz function with input vector `x` and optional steepness parameter `m`."""
@@ -202,7 +226,7 @@ class MichalewiczFunction():
         raise NotImplementedError  # TODO - Could not be plotted as is
 
 
-class RosenbrockFunction():
+class RosenbrockFunction(ScalarValuedTestFunction):
     def __call__(self, x: np.ndarray, a: float = 1, b: float = 5) -> float:
         """The Rosenbrock function with two-dimensional input vector `x` and
         two optinal parameters."""
@@ -243,7 +267,7 @@ class RosenbrockFunction():
         plt.show()
 
 
-class WheelersRidge():
+class WheelersRidge(ScalarValuedTestFunction):
     def __call__(self, x: np.ndarray, a: float = 1.5) -> float:
         """Wheeler's ridge, which takes in a two-dimensional design point `x` and an optional scalar parameter `a`."""
         return -np.exp(-(x[0]*x[1] - a)**2 - (x[1] - a)**2)
@@ -302,7 +326,17 @@ class WheelersRidge():
         plt.show()
 
 
-class CircleFunction():
+class VectorValuedTestFunction(ABC):
+    @abstractmethod
+    def __call__(self, x: np.ndarray, *args, **kwargs) -> np.ndarray:
+        pass
+
+    @abstractmethod
+    def jac(self, x: np.ndarray, *args, **kwargs) -> np.ndarray:
+        pass
+
+
+class CircleFunction(VectorValuedTestFunction):
     def __call__(self, x: np.ndarray) -> np.ndarray:
         """The circle function, which takes in a two-dimensional design point `x`
         and produces a two-dimensional objective value."""
