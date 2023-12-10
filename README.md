@@ -18,7 +18,7 @@ If you encounter any issues or have pressing comments, please [file an issue](ht
 |--:|:--|:--|:--|
 |  1 | N/A | N/A | No code blocks in this chapter |
 |  2 | ▌▌▌▌▌▌▌▌▌▌ 100% | ▌▌▌▌▌▌▌▌▌▌ 100% | **Ready for use** |
-|  3 | 0% | 0% | Nothing written |
+|  3 | ▌▌▌▌▌▌▌▌▌▌ 100% | 0% | Needs to be tested |
 |  4 | 0% | 0% | Nothing written |
 |  5 | 0% | 0% | Nothing written |
 |  6 | 0% | 0% | Nothing written |
@@ -38,7 +38,7 @@ If you encounter any issues or have pressing comments, please [file an issue](ht
 | 20 | 0% | 0% | Nothing written |
 | 21 | 0% | 0% | Nothing written |
 
-I have also written code for pertinent figures, examples, exercises through Chapter 2.
+I have also written code for pertinent figures, examples, exercises through Chapter 3.
 
 <!-- TODO - I need to go through and check that all functions have proper parameter
 and return signatures. -->
