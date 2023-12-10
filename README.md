@@ -12,7 +12,7 @@ I share this content in the hopes that it helps you and makes the decision makin
 
 If you encounter any issues or have pressing comments, please [file an issue](https://github.com/griffinbholt/optimization-code-py/issues/new/choose). (There are likely to still be bugs as I have not finished testing all of the classes and functions.)
 
-## Progress Update: (9 Dec 2023)
+## Progress Update: (10 Dec 2023)
 
 | Chapter(s) | Written | Tested | Notes |
 |--:|:--|:--|:--|
