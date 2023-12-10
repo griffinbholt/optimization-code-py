@@ -19,9 +19,9 @@ If you encounter any issues or have pressing comments, please [file an issue](ht
 |  1 | N/A | N/A | No code blocks in this chapter |
 |  2 | ▌▌▌▌▌▌▌▌▌▌ 100% | ▌▌▌▌▌▌▌▌▌▌ 100% | **Ready for use** |
 |  3 | ▌▌▌▌▌▌▌▌▌▌ 100% | 0% | Needs to be tested |
-|  4 | 0% | 0% | Nothing written |
-|  5 | 0% | 0% | Nothing written |
-|  6 | 0% | 0% | Nothing written |
+|  4 | ▌▌▌▌▌▌▌▌▌▌ 100% | 0% | Needs to be tested |
+|  5 | ▌▌▌▌▌▌▌▌▌▌ 100% | 0% | Needs to be tested |
+|  6 | ▌▌ 20% | 0% | Functions & class stubs written |
 |  7 | 0% | 0% | Nothing written |
 |  8 | 0% | 0% | Nothing written |
 |  9 | 0% | 0% | Nothing written |
