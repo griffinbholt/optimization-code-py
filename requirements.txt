@@ -1,0 +1,4 @@
+matplotlib==3.8.2
+numpy==1.26.1
+sympy==1.12
+# tensorflow==2.15.0  # NOTE: Only needed for an example right now; not necessary for tests
