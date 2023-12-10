@@ -21,7 +21,7 @@ If you encounter any issues or have pressing comments, please [file an issue](ht
 |  3 | ▌▌▌▌▌▌▌▌▌▌ 100% | 0% | Needs to be tested |
 |  4 | ▌▌▌▌▌▌▌▌▌▌ 100% | 0% | Needs to be tested |
 |  5 | ▌▌▌▌▌▌▌▌▌▌ 100% | 0% | Needs to be tested |
-|  6 | ▌▌ 20% | 0% | Functions & class stubs written |
+|  6 | ▌▌▌▌▌▌▌▌▌▌ 100% | 0% | Needs to be tested |
 |  7 | 0% | 0% | Nothing written |
 |  8 | 0% | 0% | Nothing written |
 |  9 | 0% | 0% | Nothing written |
