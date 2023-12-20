@@ -144,7 +144,7 @@ def nelder_mead(f: Callable[[np.ndarray], float],
             S[-1], y_arr[-1] = (xe, ye) if ye < yr else (xr, yr)
         elif yr >= ys:
             if yr < yh:
-                xh, yh, S[-1], y[-1] = xr, yr, xr, yr
+                xh, yh, S[-1], y_arr[-1] = xr, yr, xr, yr
             xc = xm + gamma * (xh - xm)  # contraction point
             yc = f(xc)
             if yc > yh:
