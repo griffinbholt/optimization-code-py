@@ -42,15 +42,7 @@ def secant_method(f_prime: Callable[[float], float], x0: float, x1: float, eps: 
     return x1
 
 
-class QuasiNewtonMethod(DescentMethod):
-    """
-    Just as the secant method approximates f'' in the univariate case,
-    quasi-Newton methods approximate the inverse Hessian.
-    """
-    pass
-
-
-class DFP(QuasiNewtonMethod):
+class DFP(DescentMethod):
     """The Davidon-Fletcher-Powell descent method"""
     def __init__(self, Q: np.ndarray):
         self.Q = Q  # approximate inverse Hessian
@@ -88,7 +80,7 @@ class BFGS(DFP):
              - ((1 + (np.dot(Q_gamma, gamma) / dot_dg)) * (np.outer(delta, delta) / dot_dg))
 
 
-class LimitedMemoryBFGS(QuasiNewtonMethod):
+class LimitedMemoryBFGS(DescentMethod):
     """
     The Limited-memory BFGS descent method, which avoids storing the approximate
     inverse Hessian. The parameter `m` determines the history size. It also

@@ -18,11 +18,7 @@ class DescentMethod(ABC):
         pass
 
 
-class FirstOrderMethod(DescentMethod):
-    pass
-
-
-class GradientDescent(FirstOrderMethod):
+class GradientDescent(DescentMethod):
     """
     The gradient descent method, which follows the direction of gradient descent
     with a fixed learning rate. The `step` function produces the next iterate
@@ -39,7 +35,7 @@ class GradientDescent(FirstOrderMethod):
         return x - self.alpha * g
 
 
-class ConjugateGradientDescent(FirstOrderMethod):
+class ConjugateGradientDescent(DescentMethod):
     """
     The conjugate gradient method with the Polak-Ribiere update, where `d`
     is the previous search direction and `g` is the previous gradient.
@@ -116,7 +112,7 @@ class RMSProp(Adagrad):
         return x - self.alpha * (g / (np.sqrt(self.s) + self.eps))
 
 
-class Adadelta(FirstOrderMethod):
+class Adadelta(DescentMethod):
     """
     The Adadelta accelerated descent method. The small constant `eps` is
     added to the numerator as well to prevent progress from entirely decaying to

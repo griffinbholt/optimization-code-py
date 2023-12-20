@@ -12,7 +12,7 @@ I share this content in the hopes that it helps you and makes the decision makin
 
 If you encounter any issues or have pressing comments, please [file an issue](https://github.com/griffinbholt/optimization-code-py/issues/new/choose). (There are likely to still be bugs as I have not finished testing all of the classes and functions.)
 
-## Progress Update: (10 Dec 2023)
+## Progress Update: (20 Dec 2023)
 
 | Chapter(s) | Written | Tested | Notes |
 |--:|:--|:--|:--|
@@ -22,23 +22,26 @@ If you encounter any issues or have pressing comments, please [file an issue](ht
 |  4 | ▌▌▌▌▌▌▌▌▌▌ 100% | 0% | Needs to be tested |
 |  5 | ▌▌▌▌▌▌▌▌▌▌ 100% | 0% | Needs to be tested |
 |  6 | ▌▌▌▌▌▌▌▌▌▌ 100% | 0% | Needs to be tested |
-|  7 | 0% | 0% | Nothing written |
-|  8 | 0% | 0% | Nothing written |
-|  9 | 0% | 0% | Nothing written |
-| 10 | 0% | 0% | Nothing written |
-| 11 | 0% | 0% | Nothing written |
-| 12 | 0% | 0% | Nothing written |
-| 13 | 0% | 0% | Nothing written |
-| 14 | 0% | 0% | Nothing written |
+|  7 | ▌▌▌▌▌▌▌▌▌▌ 100% | 0% | Needs to be tested |
+|  8 | ▌▌▌▌▌▌▌▌▌▌ 100% | 0% | Needs to be tested |
+|  9 | ▌▌▌▌▌▌▌▌▌▌ 100%  | 0% | Needs to be tested |
+| 10 | ▌▌▌▌▌▌▌▌▌▌ 100%  | 0% | Needs to be tested |
+| 11 | ▌▌▌▌▌▌▌▌▌▌ 100%  | 0% | Needs to be tested |
+| 12 | ▌▌▌▌▌▌▌▌▌▌ 100%  | 0% | Needs to be tested |
+| 13 | ▌▌▌▌▌▌▌▌▌▌ 100%  | 0% | Needs to be tested |
+| 14 | ▌▌▌▌▌▌▌▌▌▌ 100%  | 0% | Needs to be tested |
 | 15 | 0% | 0% | Nothing written |
 | 16 | 0% | 0% | Nothing written |
-| 17 | 0% | 0% | Nothing written |
+| 17 | N/A | N/A | No code blocks in this chapter |
 | 18 | 0% | 0% | Nothing written |
 | 19 | 0% | 0% | Nothing written |
 | 20 | 0% | 0% | Nothing written |
 | 21 | 0% | 0% | Nothing written |
 
 I have also written code for pertinent figures, examples, exercises through Chapter 4.
+
+I have also written code for test functions (`TestFunctions.py`), convenience functions (`convenience.py`),
+and probability distributions with `fit` functionality (`Distributions.py`).
 
 <!-- TODO - I need to go through and check that all functions have proper parameter
 and return signatures. -->
