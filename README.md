@@ -30,8 +30,8 @@ If you encounter any issues or have pressing comments, please [file an issue](ht
 | 12 | ▌▌▌▌▌▌▌▌▌▌ 100%  | 0% | Needs to be tested |
 | 13 | ▌▌▌▌▌▌▌▌▌▌ 100%  | 0% | Needs to be tested |
 | 14 | ▌▌▌▌▌▌▌▌▌▌ 100%  | 0% | Needs to be tested |
-| 15 | 0% | 0% | Nothing written |
-| 16 | 0% | 0% | Nothing written |
+| 15 | ▌▌▌▌▌▌▌▌▌▌ 100%  | 0% | Needs to be tested |
+| 16 | ▌▌▌▌▌▌▌▌▌▌ 100%  | 0% | Needs to be tested |
 | 17 | N/A | N/A | No code blocks in this chapter |
 | 18 | 0% | 0% | Nothing written |
 | 19 | 0% | 0% | Nothing written |
