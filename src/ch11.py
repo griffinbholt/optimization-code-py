@@ -57,7 +57,7 @@ class LinearProgram():
         b_inds = np.sort(B)
         n_inds = np.setdiff1d(np.arange(n), B)
         AB, AV = A[:, b_inds], A[:, n_inds]
-        xB = np.linalg.solve(AB, b)
+        # xB = np.linalg.solve(AB, b) # TODO - never used?
         cB = c[b_inds]
         lam = np.linalg.solve(AB.T, cB)
         cV = c[n_inds]
@@ -86,12 +86,12 @@ class LinearProgram():
             B, done = self.step(B)
         return B
 
-    def minimize(self) -> np.ndarray:
+    def minimize(self, return_idcs=False) -> np.ndarray:
         """
         The simplex algorithm for solving linear programs in equality form
         when an initial partition is not known.
         """
-        A, b, c = self.A, self.b, self.c
+        A, b, c = self.A, self.b, self.c  # TODO - c is not necessary?
         m, n = A.shape
         z = np.ones(m)
         Z = np.diag([1 if j >= 0 else -1 for j in b])
@@ -112,10 +112,31 @@ class LinearProgram():
         c_prime_prime = c_prime
         LP_opt = LinearProgram(A_prime_prime, b_prime_prime, c_prime_prime)
         B = LP_opt.minimize_given_vertex_partition(B)
-        return LP_opt.get_vertex()[:n]
+        x_opt = LP_opt.get_vertex(B)[:n]
+        if return_idcs:
+            b_inds = np.sort(B)
+            n_inds = np.setdiff1d(np.arange(n), B)
+            return x_opt, b_inds, n_inds
+        return x_opt
 
     def dual_certificate(self, x: np.ndarray, lam: np.ndarray, eps: float = 1e-6) -> bool:
+        """
+        A method for checking whether a candidate solution given by design point
+        `x` and dual point `lam` for the linear program is optimal. The
+        parameter `eps` controls the tolerance for the equality constraint.
+        """
         A, b, c = self.A, self.b, self.c
         primal_feasible = np.all(x >= 0) and np.all(np.isclose(A @ x, b))
         dual_feasible = np.all(A.T @ lam <= c)
         return primal_feasible and dual_feasible and np.isclose(np.dot(c, x), np.dot(b, lam), atol=eps)
+
+    def minimize_lp_and_y(self) -> tuple[np.ndarray, float]:
+        """
+        (From Chapter 19) Solves an LP and returns both the solutions and its
+        value. An infeasible LP produces a `NaN` solution and an `np.inf` value. 
+        """
+        try:
+            x = self.minimize()
+            return (x, np.dot(x, self.c))
+        except ValueError:
+            return (np.full(len(self.c), np.nan), np.inf)

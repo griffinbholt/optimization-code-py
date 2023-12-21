@@ -33,10 +33,10 @@ If you encounter any issues or have pressing comments, please [file an issue](ht
 | 15 | ▌▌▌▌▌▌▌▌▌▌ 100%  | 0% | Needs to be tested |
 | 16 | ▌▌▌▌▌▌▌▌▌▌ 100%  | 0% | Needs to be tested |
 | 17 | N/A | N/A | No code blocks in this chapter |
-| 18 | ▌▌▌ 30% | 0% | Wrote `polynomial_chaos_bases` and `bayesian_monte_carlo` |
-| 19 | 0% | 0% | Nothing written |
-| 20 | 0% | 0% | Nothing written |
-| 21 | 0% | 0% | Nothing written |
+| 18 | ▌▌▌▌▌▌▌▌▌▌ 100%  | 0% | Needs to be tested |
+| 19 | ▌▌▌▌▌▌▌▌▌▌ 100%  | 0% | Needs to be tested |
+| 20 | 0% | 0% | Need to figure out replacement library for `ExprRules.jl` |
+| 21 | ▌▌▌▌▌▌▌▌▌▌ 100%  | 0% | Needs to be tested |
 
 I have also written code for pertinent figures, examples, exercises through Chapter 4.
 
