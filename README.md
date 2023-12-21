@@ -36,7 +36,7 @@ If you encounter any issues or have pressing comments, please [file an issue](ht
 | 18 | ▌▌▌▌▌▌▌▌▌▌ 100%  | 0% | Needs to be tested |
 | 19 | ▌▌▌▌▌▌▌▌▌▌ 100%  | 0% | Needs to be tested |
 | 20 | 0% | 0% | Need to figure out replacement library for `ExprRules.jl` |
-| 21 | ▌▌▌▌▌▌▌▌▌▌ 100%  | 0% | Needs to be tested |
+| 21 | ▌▌▌▌▌▌▌▌▌▌ 100%  | ▌▌▌▌▌▌▌▌▌▌ 100% | **Ready for use** |
 
 I have also written code for pertinent figures, examples, exercises through Chapter 4.
 

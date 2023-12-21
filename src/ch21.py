@@ -6,10 +6,10 @@ from copy import deepcopy
 from typing import Callable
 
 
-def gauss_seidel(Fs: list[Callable[[dict[str, float]]]],
-                 A: dict[str, float],
+def gauss_seidel(Fs: list[Callable[[dict[str, float | np.ndarray]], dict[str, float | np.ndarray]]],
+                 A: dict[str, float | np.ndarray],
                  k_max: int = 100,
-                 eps: float = 1e-4) -> tuple[dict[str, float], bool]:
+                 eps: float = 1e-4) -> tuple[dict[str, float | np.ndarray], bool]:
     """
     The Gauss-Seidel algorithm for conducting a multidiciplinary analysis.
     Here, `Fs` is a list of disciplinary analysis functions that take and modify
