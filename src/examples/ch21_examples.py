@@ -72,5 +72,3 @@ def example_21_2():
     axs[1].set_xlabel("iteration")
     plt.tight_layout()
     plt.show()
-
-example_21_2()

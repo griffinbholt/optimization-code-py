@@ -32,10 +32,12 @@ def K(X: np.ndarray, X_prime: np.ndarray, k: Callable[[np.ndarray, np.ndarray], 
 
 
 def mvnrand(mu: np.ndarray, Sigma: np.ndarray, inflation: float = 1e-6) -> np.ndarray:
+    """TODO"""
     N = MvNormal(mu, Sigma + inflation*np.eye(len(mu)))
     return N.rand()
 
 class GaussianProcess():
+    """TODO"""
     def __init__(self, 
                  m: Callable[[np.ndarray], float],
                  k: Callable[[np.ndarray, np.ndarray], float],
@@ -49,9 +51,11 @@ class GaussianProcess():
         self.v = v  # noise variance
 
     def rand(self, X: np.ndarray) -> np.ndarray:
+        """TODO"""
         return mvnrand(mu(X, self.m), Sigma(X, self.k))
 
     def predict(self, X_pred: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
+        """TODO"""
         m, k, v = self.m, self.k, self.v
         tmp = np.linalg.solve(K(X_pred, self.X, k), K(self.X, self.X, k) + v * np.eye(len(self.X)))
         mu_p = mu(X_pred, m) + tmp @ (self.y - mu(self.X, m))
