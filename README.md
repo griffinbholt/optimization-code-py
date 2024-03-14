@@ -19,7 +19,7 @@ If you encounter any issues or have pressing comments, please [file an issue](ht
 |  1 | N/A | N/A | No code blocks in this chapter |
 |  2 | ▌▌▌▌▌▌▌▌▌▌ 100% | ▌▌▌▌▌▌▌▌▌▌ 100% | **Ready for use** |
 |  3 | ▌▌▌▌▌▌▌▌▌▌ 100% | ▌▌▌▌▌▌▌▌▌▌ 100% | **Ready for use** |
-|  4 | ▌▌▌▌▌▌▌▌▌▌ 100% | 0% | Needs to be tested |
+|  4 | ▌▌▌▌▌▌▌▌▌▌ 100% | ▌▌▌▌▌▌▌▌▌▌ 100% | **Ready for use** |
 |  5 | ▌▌▌▌▌▌▌▌▌▌ 100% | 0% | Needs to be tested |
 |  6 | ▌▌▌▌▌▌▌▌▌▌ 100% | 0% | Needs to be tested |
 |  7 | ▌▌▌▌▌▌▌▌▌▌ 100% | 0% | Needs to be tested |

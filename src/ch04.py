@@ -25,7 +25,6 @@ def line_search(f: Callable[[np.ndarray], float],
     """
     def objective(alpha): return f(x + alpha*d)
     a, b = bracket_minimum(objective)
-    print((a, b))
     alpha = minimize(objective, a, b)
     return x + alpha*d
 
