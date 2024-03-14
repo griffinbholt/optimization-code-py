@@ -5,6 +5,7 @@ import numpy as np
 
 from ch04 import line_search, backtracking_line_search
 
+
 def example_4_1():
     """Example 4.1: Line search used to minimize a function along a descent direction"""
     def f(x): return np.sin(x[0]*x[1]) + np.exp(x[1] + x[2]) - x[2]

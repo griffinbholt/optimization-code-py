@@ -12,7 +12,7 @@ I share this content in the hopes that it helps you and makes the decision makin
 
 If you encounter any issues or have pressing comments, please [file an issue](https://github.com/griffinbholt/optimization-code-py/issues/new/choose). (There are likely to still be bugs as I have not finished testing all of the classes and functions.)
 
-## Progress Update: (13 Mar 2024)
+## Progress Update: (14 Mar 2024)
 
 | Chapter(s) | Written | Tested | Notes |
 |--:|:--|:--|:--|
@@ -21,7 +21,7 @@ If you encounter any issues or have pressing comments, please [file an issue](ht
 |  3 | ▌▌▌▌▌▌▌▌▌▌ 100% | ▌▌▌▌▌▌▌▌▌▌ 100% | **Ready for use** |
 |  4 | ▌▌▌▌▌▌▌▌▌▌ 100% | ▌▌▌▌▌▌▌▌▌▌ 100% | **Ready for use** |
 |  5 | ▌▌▌▌▌▌▌▌▌▌ 100% | ▌▌▌▌▌▌▌▌▌▌ 100% | **Ready for use** |
-|  6 | ▌▌▌▌▌▌▌▌▌▌ 100% | 0% | Needs to be tested |
+|  6 | ▌▌▌▌▌▌▌▌▌▌ 100% | ▌▌▌ 25% | Only `newtons_method` is tested |
 |  7 | ▌▌▌▌▌▌▌▌▌▌ 100% | 0% | Needs to be tested |
 |  8 | ▌▌▌▌▌▌▌▌▌▌ 100% | 0% | Needs to be tested |
 |  9 | ▌▌▌▌▌▌▌▌▌▌ 100%  | 0% | Needs to be tested |
@@ -38,7 +38,7 @@ If you encounter any issues or have pressing comments, please [file an issue](ht
 | 20 | 0% | 0% | Need to figure out replacement library for `ExprRules.jl` |
 | 21 | ▌▌▌▌▌▌▌▌▌▌ 100%  | ▌▌▌▌▌▌▌▌▌▌ 100% | **Ready for use** |
 
-I have also written code for pertinent figures, examples, exercises through Chapter 4.
+I have also written code for pertinent figures, examples, exercises through Chapter 6.
 
 I have also written code for test functions (`TestFunctions.py`), convenience functions (`convenience.py`),
 and probability distributions with `fit` functionality (`Distributions.py`).

@@ -5,6 +5,7 @@ import numpy as np
 
 from ch02 import diff_forward, diff_central, diff_complex
 
+
 def figure_2_4():
     """
     Figure 2.4: A comparison of the error in derivative estimate for the

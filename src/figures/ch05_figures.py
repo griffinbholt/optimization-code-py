@@ -8,6 +8,7 @@ from ch05 import GradientDescent
 from TestFunctions import rosenbrock
 from convenience import plot_contour
 
+
 def figure_5_1():  # TODO - To duplicate the effect, I need to see the parameters
     """
     Figure 5.1: Gradient descent can result in zig-zagging in narrow canyons.

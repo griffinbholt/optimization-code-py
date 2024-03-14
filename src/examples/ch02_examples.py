@@ -10,12 +10,14 @@ def example_2_1():
     f = x**2 + x/2 - sp.sin(x)/x
     print(sp.diff(f, x))
 
+
 def example_2_4():
     """Example 2.4: The complex step method for estimating derivatives"""
     def f(x): return np.sin(x**2)
     v = f(np.pi/2 + 0.001j)
     print("f(x) = real(v) = ", np.real(v))
     print("f'(x) = imag(v)/0.001 = ", np.imag(v)/0.001)
+
 
 def example_2_5():
     """Example 2.5: An implementation of dual numbers allows for automatic forward accumulation"""
@@ -50,6 +52,7 @@ def example_2_5():
     a = Dual(3, 1)
     b = Dual(2, 0)
     print(Dual.log(a*b + Dual.max(a, 2)))
+
 
 def example_2_6():
     """

@@ -2,6 +2,7 @@ import sys; sys.path.append('../')
 
 import numpy as np
 
+
 def exercise_3_4():
     """Exercise 3.4: Applying Bisection to f(x) = x^2/2 - x, starting with [0, 1000]"""
     def f_prime(x): return x - 1

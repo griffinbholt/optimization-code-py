@@ -4,6 +4,7 @@ import numpy as np
 
 from ch03 import PHI
 
+
 def example_3_1():
     """
     Example 3.1: Using Fibonacci search with five function evaluations
