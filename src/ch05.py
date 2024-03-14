@@ -40,7 +40,7 @@ class ConjugateGradientDescent(DescentMethod):
     The conjugate gradient method with the Polak-Ribiere update, where `d`
     is the previous search direction and `g` is the previous gradient.
     """
-    def __init__(self, d: np.ndarray, g: np.ndarray):
+    def __init__(self, d: np.ndarray = None, g: np.ndarray = None):
         self.d = d  # previous search direction
         self.g = g  # previous gradient
 
@@ -59,7 +59,7 @@ class ConjugateGradientDescent(DescentMethod):
 
 class Momentum(GradientDescent):
     """The momentum method for accelerated descent."""
-    def __init__(self, alpha: float, beta: float, v: np.ndarray):
+    def __init__(self, alpha: float, beta: float, v: np.ndarray = None):
         super().__init__(alpha)  # learning rate
         self.beta = beta         # momentum decay
         self.v = v               # momentum
@@ -75,7 +75,7 @@ class Momentum(GradientDescent):
 
 class NesterovMomentum(Momentum):
     """Nesterov's momentum method of accelerated descent."""
-    def __init__(self, alpha: float, beta: float, v: np.ndarray):
+    def __init__(self, alpha: float, beta: float, v: np.ndarray = None):
         super().__init__(alpha, beta, v)
 
     def step(self, f: Callable[[np.ndarray], float], grad_f: Callable[[np.ndarray], float], x: np.ndarray) -> np.ndarray:
@@ -86,7 +86,7 @@ class NesterovMomentum(Momentum):
 
 class Adagrad(GradientDescent):
     """The Adagrad accelerated descent method."""
-    def __init__(self, alpha: float, eps: float, s: np.ndarray):
+    def __init__(self, alpha: float, eps: float, s: np.ndarray = None):
         super().__init__(alpha)  # learning rate
         self.eps = eps           # small value
         self.s = s               # sum of squared gradient
@@ -102,7 +102,7 @@ class Adagrad(GradientDescent):
 
 class RMSProp(Adagrad):
     """The RMSProp accelerated descent method."""
-    def __init__(self, alpha: float, gamma: float, eps: float, s: np.ndarray):
+    def __init__(self, alpha: float, gamma: float, eps: float, s: np.ndarray = None):
         super().__init__(alpha, eps, s)
         self.gamma = gamma  # decay
     
@@ -118,7 +118,7 @@ class Adadelta(DescentMethod):
     added to the numerator as well to prevent progress from entirely decaying to
     zero and to start off the first iteration where `delta_x = 0`.
     """
-    def __init__(self, gamma_s: float, gamma_x: float, eps: float, s: np.ndarray, u: np.ndarray):
+    def __init__(self, gamma_s: float, gamma_x: float, eps: float, s: np.ndarray = None, u: np.ndarray = None):
         self.gamma_s = gamma_s  # gradient decay
         self.gamma_x = gamma_x  # update decay
         self.eps = eps          # small value
@@ -139,7 +139,7 @@ class Adadelta(DescentMethod):
 
 class Adam(GradientDescent):
     """The Adam accelerated descent method."""
-    def __init__(self, alpha: float, gamma_v: float, gamma_s: float, eps: float, k: int, v: np.ndarray, s: np.ndarray):
+    def __init__(self, alpha: float, gamma_v: float, gamma_s: float, eps: float, k: int = 0, v: np.ndarray = None, s: np.ndarray = None):
         super().__init__(alpha)  # learning rate
         self.gamma_v = gamma_v   # 1st moment decay
         self.gamma_s = gamma_s   # 2nd moment decay
@@ -165,7 +165,7 @@ class Adam(GradientDescent):
 
 class HyperGradientDescent(GradientDescent):
     """The hypergradient form of gradient descent."""
-    def __init__(self, alpha_0: float, mu: float, alpha: float, g_prev: np.ndarray):
+    def __init__(self, alpha_0: float, mu: float, alpha: float = None, g_prev: np.ndarray = None):
         super().__init__(alpha)  # current learning rate
         self.alpha_0 = alpha_0   # initial learning rate
         self.mu = mu             # learning rate of the learning rate
@@ -184,7 +184,7 @@ class HyperGradientDescent(GradientDescent):
 
 class HyperNesterovMomentum(NesterovMomentum):
     """The hypergradient form of the Nesterov momentum descent method."""
-    def __init__(self, alpha_0: float, mu: float, beta: float, v: np.ndarray, alpha: float, g_prev: np.ndarray):
+    def __init__(self, alpha_0: float, mu: float, beta: float, v: np.ndarray = None, alpha: float = None, g_prev: np.ndarray = None):
         super().__init__(alpha, beta, v)  # current learning rate, momentum decay, momentum
         self.alpha_0 = alpha_0            # initial learning rate
         self.mu = mu                      # learning rate of the learning rate

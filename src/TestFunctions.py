@@ -78,7 +78,7 @@ class AckleysFunction(ScalarValuedTestFunction):
         
         return hess
 
-    def global_min(self, d: int, a: float = 20, b: float = 0.2, c: float = 2*np.pi) -> tuple[float, np.ndarray]:
+    def global_min(self, d: int = 2, a: float = 20, b: float = 0.2, c: float = 2*np.pi) -> tuple[float, np.ndarray]:
         return 0.0, np.zeros(d)
 
     def plot(self):
@@ -300,7 +300,6 @@ class MichalewiczFunction(ScalarValuedTestFunction):
         cos_inner = np.cos(inner)
         const = (2 * i * x) / np.pi
         const2 = 2 * m * const
-
 
         tmp1 = -(2*m - 1) * (sin_inner**(2*m - 2)) * cos_inner * const
         tmp2 = cos_x * sin_inner + const2 * sin_x * cos_inner
