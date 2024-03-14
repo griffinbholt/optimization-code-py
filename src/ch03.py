@@ -16,7 +16,7 @@ def bracket_minimum(f: Callable[[float], float],
     An algorithm for bracketing an interval in which a local minimum must exist.
     It takes as input a univariate function `f` and starting position `x`, which
     defaults to 0.0. The starting step size `s` and the expansion factor `k` can
-    be specified. It returns a tuple containg the new interval [a, b].
+    be specified. It returns a tuple containing the new interval [a, b].
     """
     a, y_a = x, f(x)
     b, y_b = a + s, f(a + s)
@@ -144,15 +144,15 @@ def shubert_piyavskii(f: Callable[[float], float],
         P_prev = _get_sp_intersection(pts[i - 1], P, l)
         P_next = _get_sp_intersection(P, pts[i + 1], l)
 
-        pts = np.delete(pts, i)
-        pts = np.insert(pts, i, P_next)
-        pts = np.insert(pts, i, P)
-        pts = np.insert(pts, i, P_prev)
+        pts = np.delete(pts, i, axis=0)
+        pts = np.insert(pts, i, P_next, axis=0)
+        pts = np.insert(pts, i, P, axis=0)
+        pts = np.insert(pts, i, P_prev, axis=0)
 
     intervals = []
     P_min = pts[2 * np.argmin(pts[::2, 1])]
     y_min = P_min[1]
-    for i in range(2, len(pts) + 1, 2):
+    for i in range(1, len(pts), 2):
         if pts[i, 1] < y_min:
             dy = y_min - pts[i, 1]
             x_lo = np.maximum(a, pts[i, 0] - (dy/l))
