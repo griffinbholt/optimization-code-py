@@ -23,8 +23,8 @@ def plot_surface(fig, f, xlim, ylim, zlim, xstride, ystride, subplot_coords=None
         ax = fig.add_subplot(projection='3d')
     ax.plot_surface(X, Y, Z, cmap=VIRIDIS_REV)
     ax.set_zlim(*zlim) # Customize the z-axis
-    ax.set_xlabel('x1')
-    ax.set_ylabel('x2')
+    ax.set_xlabel('$x_1$')
+    ax.set_ylabel('$x_2$')
     return ax
 
 def plot_contour(fig, f, xlim, ylim, xstride, ystride, levels=None, filled=False, clabel=False, subplot_coords=None):
@@ -35,19 +35,19 @@ def plot_contour(fig, f, xlim, ylim, xstride, ystride, levels=None, filled=False
         ax = fig.add_subplot()
     if filled:
         if levels is not None:
-            CS = ax.contourf(X, Y, Z, levels=levels, cmap=VIRIDIS_REV)
+            CS = ax.contourf(X, Y, Z, levels=levels, cmap=VIRIDIS_REV, zorder=1)
         else:
-            CS = ax.contourf(X, Y, Z, locator=ticker.LogLocator(), cmap=VIRIDIS_REV)
+            CS = ax.contourf(X, Y, Z, locator=ticker.LogLocator(), cmap=VIRIDIS_REV, zorder=1)
     else:
         if levels is not None:
-            CS = ax.contour(X, Y, Z, levels=levels, cmap=VIRIDIS_REV)
+            CS = ax.contour(X, Y, Z, levels=levels, cmap=VIRIDIS_REV, zorder=1)
         else:
-            CS = ax.contour(X, Y, Z, locator=ticker.LogLocator(), cmap=VIRIDIS_REV)
+            CS = ax.contour(X, Y, Z, locator=ticker.LogLocator(), cmap=VIRIDIS_REV, zorder=1)
     if clabel:
         ax.clabel(CS, inline=True, fontsize=10)
     ax.set_aspect('equal')
-    ax.set_xlabel('x1')
-    ax.set_ylabel('x2')
+    ax.set_xlabel('$x_1$')
+    ax.set_ylabel('$x_2$')
     return ax
 
 def _make_3d_data(f, xlim, ylim, xstride, ystride):

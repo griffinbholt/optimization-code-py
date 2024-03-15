@@ -26,7 +26,7 @@ def cyclic_coordinate_descent(f: Callable[[np.ndarray], float],
     """
     delta, n = np.inf, len(x)
     while delta > eps:
-        x_prev = x.copy()  # TODO - Check if the copy is necessary
+        x_prev = x.copy()
         for i in range(n):
             d = basis(i, n)
             x = line_search(f, x, d)
@@ -45,7 +45,7 @@ def powell(f: Callable[[np.ndarray], float], x: np.ndarray, eps: float) -> np.nd
     U = np.eye(n)
     delta = np.inf
     while delta > eps:
-        x_prime = x
+        x_prime = x.copy()
         for i in range(n):
             d = U[i]
             x_prime = line_search(f, x_prime, d)
