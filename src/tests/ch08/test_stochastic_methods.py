@@ -4,6 +4,7 @@ import numpy as np
 
 from ch08 import *
 
+
 class TestStochasticMethods():
     def test_noisy_descent(self):
         pass

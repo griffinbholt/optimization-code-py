@@ -35,7 +35,7 @@ def rand_population_cauchy(m: int, mu: np.ndarray, sigma: np.ndarray) -> np.ndar
     in a normal distribution.
     """
     n = len(mu)
-    return np.array([[Cauchy(mu[j], sigma[j]).rand() for j in range(n)] for i in range(m)])
+    return np.array([[Cauchy(mu[j], sigma[j]).rand() for j in range(n)] for _ in range(m)])
 
 
 def genetic_algorithms(f: Callable[[np.ndarray], float],
