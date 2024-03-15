@@ -271,7 +271,7 @@ class Intervals(OrderedDict[float, PriorityQueue[tuple[float, Interval]]]):
                     x1, y1 = interval1.vertex_dist(), interval1.y
                     x2, y2 = interval2.vertex_dist(), interval2.y
                     l = (y2 - y) / (x2 - x)
-                    if y1 <= l * (x1 - x) + y + eps:
+                    if (y1 <= l * (x1 - x) + y + eps): # TODO: and (y1 <= l * x1 + y_best - eps*np.abs(y_best)):
                         break
                     stack.pop()  # remove previous interval
                 
