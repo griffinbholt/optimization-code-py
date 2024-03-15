@@ -21,7 +21,7 @@ If you encounter any issues or have pressing comments, please [file an issue](ht
 |  3 | ▌▌▌▌▌▌▌▌▌▌ 100% | ▌▌▌▌▌▌▌▌▌▌ 100% | **Ready for use** |
 |  4 | ▌▌▌▌▌▌▌▌▌▌ 100% | ▌▌▌▌▌▌▌▌▌▌ 100% | **Ready for use** |
 |  5 | ▌▌▌▌▌▌▌▌▌▌ 100% | ▌▌▌▌▌▌▌▌▌▌ 100% | **Ready for use** |
-|  6 | ▌▌▌▌▌▌▌▌▌▌ 100% | ▌▌▌ 25% | Only `newtons_method` is tested |
+|  6 | ▌▌▌▌▌▌▌▌▌▌ 100% | ▌▌▌▌▌▌▌▌▌▌ 100% | **Ready for use** |
 |  7 | ▌▌▌▌▌▌▌▌▌▌ 100% | 0% | Needs to be tested |
 |  8 | ▌▌▌▌▌▌▌▌▌▌ 100% | 0% | Needs to be tested |
 |  9 | ▌▌▌▌▌▌▌▌▌▌ 100%  | 0% | Needs to be tested |

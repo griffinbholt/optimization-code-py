@@ -44,7 +44,7 @@ def secant_method(f_prime: Callable[[float], float], x0: float, x1: float, eps: 
 
 class DFP(DescentMethod):
     """The Davidon-Fletcher-Powell descent method"""
-    def __init__(self, Q: np.ndarray):
+    def __init__(self, Q: np.ndarray = None):
         self.Q = Q  # approximate inverse Hessian
 
     def initialize(self, f: Callable[[np.ndarray], float], grad_f: Callable[[np.ndarray], float], x: np.ndarray):
@@ -70,7 +70,7 @@ class BFGS(DFP):
     
     NOTE: BFGS is the same as DFP, except for the `Q` update rule.
     """
-    def __init__(self, Q: np.ndarray):
+    def __init__(self, Q: np.ndarray = None):
         super().__init__(Q)
 
     def Q_update(self, delta: np.ndarray, gamma: np.ndarray, Q_gamma: np.ndarray) -> np.ndarray:
@@ -87,7 +87,7 @@ class LimitedMemoryBFGS(DescentMethod):
     stores the step differences `deltas`, the gradient changes `gammas`, and
     storage vectors `qs`.
     """
-    def __init__(self, m: int, deltas: list[np.ndarray], gammas: list[np.ndarray], qs: np.ndarray):
+    def __init__(self, m: int, deltas: list[np.ndarray] = None, gammas: list[np.ndarray] = None, qs: np.ndarray = None):
         self.m = m            # history size
         self.deltas = deltas  # step differences
         self.gammas = gammas  # gradient changes
@@ -102,11 +102,11 @@ class LimitedMemoryBFGS(DescentMethod):
         g = grad_f(x)
         m = len(self.deltas)
         if m > 0:
-            q = g
+            q = g.copy()
             for i in range(m - 1, -1, -1):
                 self.qs[i] = q.copy()
                 q -= (np.dot(self.deltas[i], q) / np.dot(self.gammas[i], self.deltas[i])) * self.gammas[i]
-            z = (self.gammas[m - 1] * self.deltas[m - 1] * q) / np.dot(self.gammas[m - 1], self.gammas[m - 1])
+            z = (self.gammas[-1] * self.deltas[-1] * q) / np.dot(self.gammas[-1], self.gammas[-1])
             for i in range(m):
                 z += self.deltas[i] * ((np.dot(self.deltas[i], self.qs[i]) - np.dot(self.gammas[i], z)) / np.dot(self.gammas[i], self.deltas[i]))
             x_prime = line_search(f, x, -z)
