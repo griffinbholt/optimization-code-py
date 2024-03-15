@@ -12,7 +12,7 @@ I share this content in the hopes that it helps you and makes the decision makin
 
 If you encounter any issues or have pressing comments, please [file an issue](https://github.com/griffinbholt/optimization-code-py/issues/new/choose). (There are likely to still be bugs as I have not finished testing all of the classes and functions.)
 
-## Progress Update: (14 Mar 2024)
+## Progress Update: (15 Mar 2024)
 
 | Chapter(s) | Written | Tested | Notes |
 |--:|:--|:--|:--|
@@ -42,8 +42,6 @@ I have also written code for pertinent figures, examples, exercises through Chap
 
 I have also written code for test functions (`TestFunctions.py`), convenience functions (`convenience.py`),
 and probability distributions with `fit` functionality (`Distributions.py`).
-
-<!-- Testing TODOs -->
 
 <!-- TODO - I need to go through and check that all functions have proper parameter
 and return signatures. -->
