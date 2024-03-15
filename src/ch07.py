@@ -26,7 +26,7 @@ def cyclic_coordinate_descent(f: Callable[[np.ndarray], float],
     """
     delta, n = np.inf, len(x)
     while delta > eps:
-        x_prev = x  # TODO - I don't think the copy is necessary, since x is never edited in place
+        x_prev = x.copy()  # TODO - Check if the copy is necessary
         for i in range(n):
             d = basis(i, n)
             x = line_search(f, x, d)
