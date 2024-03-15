@@ -178,11 +178,11 @@ def adaptive_simulated_annealing(f: Callable[[np.ndarray], float],
     return x_best
 
 
-def cross_entropy(f: Callable[[np.ndarray], float],
-                  P: Distribution,
-                  k_max: int,
-                  m: int = 100,
-                  m_elite: int = 10) -> Distribution:
+def cross_entropy_method(f: Callable[[np.ndarray], float],
+                         P: Distribution,
+                         k_max: int,
+                         m: int = 100,
+                         m_elite: int = 10) -> Distribution:
     """
     The cross-entropy method, which takes an objective function `f` to
     be minimized, a proposal distribution `P`, an iteration count `k_max`,
