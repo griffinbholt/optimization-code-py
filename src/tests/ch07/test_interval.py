@@ -4,5 +4,11 @@ from ch07 import Interval
 
 
 class TestInterval():
-    def test(self):
-        pass
+    def test_min_depth(self):
+        pass  # TODO
+
+    def test_vertex_dist(self):
+        pass  # TODO
+
+    def test_divide(self):
+        pass  # TODO

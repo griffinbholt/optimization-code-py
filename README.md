@@ -22,7 +22,7 @@ If you encounter any issues or have pressing comments, please [file an issue](ht
 |  4 | ▌▌▌▌▌▌▌▌▌▌ 100% | ▌▌▌▌▌▌▌▌▌▌ 100% | **Ready for use** |
 |  5 | ▌▌▌▌▌▌▌▌▌▌ 100% | ▌▌▌▌▌▌▌▌▌▌ 100% | **Ready for use** |
 |  6 | ▌▌▌▌▌▌▌▌▌▌ 100% | ▌▌▌▌▌▌▌▌▌▌ 100% | **Ready for use** |
-|  7 | ▌▌▌▌▌▌▌▌▌▌ 100% | ▌▌▌ 30% | `generalized_pattern_search`, `nelder_mead`, and the DIRECT-related methods still need to be tested |
+|  7 | ▌▌▌▌▌▌▌▌▌▌ 100% | ▌▌▌▌▌▌▌ 70% | `Interval` and `Intervals` still need to be tested |
 |  8 | ▌▌▌▌▌▌▌▌▌▌ 100% | 0% | Needs to be tested |
 |  9 | ▌▌▌▌▌▌▌▌▌▌ 100%  | 0% | Needs to be tested |
 | 10 | ▌▌▌▌▌▌▌▌▌▌ 100%  | 0% | Needs to be tested |

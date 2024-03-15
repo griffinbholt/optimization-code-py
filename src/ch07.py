@@ -109,7 +109,8 @@ def generalized_pattern_search(f: Callable[[np.ndarray], float],
             y_prime = f(x_prime)
             if y_prime < y:
                 x, y, improved = x_prime, y_prime, True
-                D = np.insert(np.delete(D, i, axis=0), 0, d)
+                D = np.insert(np.delete(D, i, axis=0), 0, d, axis=0)
+                break
         if not improved:
             alpha *= gamma
     return x
@@ -134,7 +135,7 @@ def nelder_mead(f: Callable[[np.ndarray], float],
         xl, yl = S[0], y_arr[0]       # lowest
         xh, yh = S[-1], y_arr[-1]     # highest
         xs, ys = S[-2], y_arr[-2]     # second-highest
-        xm = np.mean(S[:-1], axis=1)  # centroid
+        xm = np.mean(S[:-1], axis=0)  # centroid
         xr = xm + alpha * (xm - xh)   # reflection point
         yr = f(xr)
 
@@ -156,7 +157,7 @@ def nelder_mead(f: Callable[[np.ndarray], float],
         else:
             S[-1], y_arr[-1] = xr, yr
         
-        delta = np.std(y_arr, ddof=1)
+        delta = np.std(y_arr)
     return S[np.argmin(y_arr)]
 
 
@@ -182,7 +183,7 @@ def direct(f: Callable[[np.ndarray], float],
         S = intervals.get_opt_intervals(eps, y_best)  # TODO - Why is y_best needed?
         to_add = []
         for interval in S:
-            to_add.append(interval.divide(g))
+            to_add.extend(interval.divide(g))
             intervals[interval.vertex_dist()].get()
         for interval in to_add:
             intervals.add_interval(interval)
@@ -215,6 +216,9 @@ class Interval():
         self.c = c
         self.y = y
         self.depths = depths
+
+    def __lt__(self, other: 'Interval'):
+        return self.y < other.y
     
     def min_depth(self):
         return np.min(self.depths)
@@ -248,7 +252,7 @@ class Intervals(OrderedDict[float, PriorityQueue[tuple[float, Interval]]]):
     def add_interval(self, interval: Interval):
         """Inserts a new `Interval` into the data structure."""
         d = interval.vertex_dist()
-        if d not in self.keys:
+        if d not in self.keys():
             self[d] = PriorityQueue()
         self[d].put((interval.y, interval))
 
@@ -258,7 +262,7 @@ class Intervals(OrderedDict[float, PriorityQueue[tuple[float, Interval]]]):
         stack = []
         for (x, pq) in self.items():
             if not pq.empty():
-                interval = pq[0][1]
+                interval = pq.queue[0][1]
                 y = interval.y
 
                 while len(stack) > 1:
