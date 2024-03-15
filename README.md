@@ -43,6 +43,8 @@ I have also written code for pertinent figures, examples, exercises through Chap
 I have also written code for test functions (`TestFunctions.py`), convenience functions (`convenience.py`),
 and probability distributions with `fit` functionality (`Distributions.py`).
 
+<!-- Testing TODOs -->
+
 <!-- TODO - I need to go through and check that all functions have proper parameter
 and return signatures. -->
 
