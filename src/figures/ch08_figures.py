@@ -2,7 +2,7 @@ import sys; sys.path.append('./src/'); sys.path.append('../')
 
 import matplotlib.pyplot as plt
 import numpy as np
-from scipy.stats import multivariate_normal
+from scipy.stats import norm, multivariate_normal
 
 from ch05 import GradientDescent
 from ch08 import NoisyDescent, rand_positive_spanning_set
@@ -141,6 +141,56 @@ def figure_8_4():
     plt.show()
 
 
+def figure_8_5(sigma: float = 1.5, gamma: float = 0.5, t1: float = 1.0):
+    """
+    Figure 8.5: Simulated annealing with an exponentially decaying temperature,
+    where the histograms indicate the probability of simulated annealing being
+    at a particular position at that iteration.
+    """
+    def f(x): return (np.sin(5*(x + np.pi/3 + np.pi/10)) + 2*np.sin(x + np.pi/4 + np.pi/10) + 2.937)/(2*2.937)
+    T = norm(0, sigma)
+    def t(k, gamma=gamma, t1=t1): return (gamma**(k - 1)) * t1
+
+    n_trials = 1000
+    k_max = 8
+    traj = np.zeros((n_trials, k_max))
+    traj[:, 0] = 0.5
+
+    # Run trials
+    for i in range(n_trials):
+        x = 0.5
+        y = f(x)
+        x_best, y_best = x, y
+        for k in range(1, k_max):
+            x_prime = x + T.rvs()
+            y_prime = f(x_prime)
+            delta_y = y_prime - y
+            if (delta_y <= 0) or (np.random.rand() < np.exp(-delta_y / t(k))):
+                x, y = x_prime, y_prime
+            if y_prime < y_best:
+                x_best, y_best = x_prime, y_prime
+            traj[i, k] = x
+
+    # Plot the results
+    xlim = (0.0, 6.5)
+    x = np.linspace(xlim[0], xlim[1], 1000)
+    fig = plt.figure(figsize=(20, 5))
+    for k in range(k_max):
+        ax = fig.add_subplot(2, 4, k + 1)
+        ax.plot(x, f(x), c='black')
+        ax.hist(traj[:, k], bins=np.linspace(xlim[0], xlim[1], 50), density=True, alpha=0.5)
+        ax.set_xlim(xlim[0], xlim[1])
+        ax.set_ylim(0, 1.1)
+        ax.tick_params(axis="both", which="both", bottom=False, left=False, labelbottom=False, labelleft=False)
+        if k in [0, 4]:
+            ax.set_ylabel("$y$")
+        if k in [4, 5, 6, 7]:
+            ax.set_xlabel("$x$")
+    plt.suptitle("Figure 8.5", y=0.93)
+    plt.subplots_adjust(wspace=0.05, hspace=0.05)
+    plt.show()
+
+
 def figure_8_6():
     """
     Figure 8.6: The cross-entropy method with `m = 40` applied to the Branin
@@ -149,7 +199,6 @@ def figure_8_6():
     """
     k_max = 4
     P = multivariate_normal(np.array([3.0, 7.5]), 5*np.eye(2))
-    P_gen = multivariate_normal
     m = 40
     m_elite = 10
     f = branin
@@ -169,11 +218,10 @@ def figure_8_6():
         order = np.argsort(np.apply_along_axis(f, 1, samples))
         elite_samples = samples[order[:m_elite]]
         ax.scatter(elite_samples[:, 0], elite_samples[:, 1], c='tab:red', s=1.0)
-        P = P_gen(*P_gen.fit(elite_samples))
+        P = P._dist(*P._dist.fit(elite_samples))
     plt.suptitle("Figure 8.6", y=0.8)
     plt.show()
 
-# TODO - Figure 8.5
 # TODO - Figure 8.7
 # TODO - Figure 8.8
 # TODO - Figure 8.9

@@ -87,7 +87,7 @@ def example_8_3():
     distributions. The parameter vector `theta` is replaced by a distribution `P`.
     Calling `P.rvs(m)` will produce a m x n matrix corresponding to m samples of
     n-dimensional samples from `P`, and calling `fit` will fit a new distribution
-    of the given generator type.
+    of the given input type.
     """
     np.random.seed(0)
     def f(x): return np.linalg.norm(x)
@@ -95,5 +95,5 @@ def example_8_3():
     Sigma = np.array([[1.0, 0.2], [0.2, 2.0]])
     P = multivariate_normal(mu, Sigma)
     k_max = 10
-    P = cross_entropy_method(f, P, multivariate_normal, k_max)
+    P = cross_entropy_method(f, P, k_max)
     print("P.mu =", P.mean)

@@ -4,9 +4,11 @@ import cvxpy as cp
 import numpy as np
 import warnings
 
+from scipy.stats import norm, multivariate_normal
+
 from ch05 import GradientDescent, Adam, HyperNesterovMomentum
 from ch08 import *
-from TestFunctions import booth, branin, rosenbrock, wheeler
+from TestFunctions import ackley, booth, branin, rosenbrock, wheeler
 
 
 class TestStochasticMethods():
@@ -64,11 +66,26 @@ class TestStochasticMethods():
         assert np.all(np.abs(x - x_min) < 1e-3)
 
     def test_simulated_annealing(self):
-        pass
+        np.random.seed(42)
+        x0 = 0.5
+        def f(x): return np.sin(5*(x + np.pi/3 + np.pi/10)) + 2*np.sin(x + np.pi/4 + np.pi/10)
+        def t(k, gamma=0.5, t1=1.0): return (gamma**(k - 1)) * t1
+        x_best, y_best = x0, f(x0)
+        for _ in range(100):
+            x = simulated_annealing(f, x=x0, T=norm(0, 1.5), t=t, k_max=20)
+            if f(x) < y_best:
+                x_best, y_best = x, f(x)
+        assert np.abs(y_best - (-2.937)) < 1e-2
 
-
-
-
+        x0 = np.array([10.0, 10.0])
+        def t(k, gamma=0.75, t1=10.0): return (gamma**(k - 1)) * t1
+        T = multivariate_normal(np.zeros(2), 25*np.eye(2))
+        x_best, y_best = x0, ackley(x0)
+        for _ in range(1000):
+            x = simulated_annealing(ackley, x=x0, T=T, t=t, k_max=100)
+            if ackley(x) < y_best:
+                x_best, y_best = x, ackley(x)
+        assert y_best < 0.15
 
     def test_corana_update(self):
         pass
@@ -84,6 +101,3 @@ class TestStochasticMethods():
 
     def test_covariance_matrix_adaptation(self):
         pass
-
-test = TestStochasticMethods()
-test.test_mesh_adaptive_direct_search()
