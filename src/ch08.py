@@ -3,13 +3,11 @@
 import numpy as np
 
 from scipy.linalg import fractional_matrix_power
-from scipy.stats import uniform
+from scipy.stats import uniform, multivariate_normal, rv_continuous
 from typing import Callable
 
 from ch05 import DescentMethod
 from ch07 import basis
-
-from Distributions import Distribution, MvNormal
 
 
 class NoisyDescent(DescentMethod):
@@ -18,7 +16,7 @@ class NoisyDescent(DescentMethod):
     Gaussian noise. The method takes another `DescentMethod` `submethod`, a
     noise sequence `sigma` and stores the iteration count `k`.
     """
-    def __init__(self, submethod: DescentMethod, sigma: Callable[[int], float], k: int):
+    def __init__(self, submethod: DescentMethod, sigma: Callable[[int], float], k: int = 1):
         assert not isinstance(submethod, NoisyDescent)  # needs to be non-stochastic descent method
         self.submethod = submethod
         self.sigma = sigma
@@ -60,7 +58,7 @@ def mesh_adaptive_direct_search(f: Callable[[np.ndarray], float], x: np.ndarray,
     alpha, y, n = 1.0, f(x), len(x)
     while alpha > eps:
         improved = False
-        for (i, d) in enumerate(rand_positive_spanning_set(alpha, n)):
+        for d in rand_positive_spanning_set(alpha, n):
             x_prime = x + alpha * d
             y_prime = f(x_prime)
             if y_prime < y:
@@ -70,13 +68,13 @@ def mesh_adaptive_direct_search(f: Callable[[np.ndarray], float], x: np.ndarray,
                 if y_prime < y:
                     x, y = x_prime, y_prime
                 break
-        alpha = np.min(4 * alpha, 1.0) if improved else alpha / 4
+        alpha = np.minimum(4 * alpha, 1.0) if improved else alpha / 4
     return x
 
 
 def simulated_annealing(f: Callable[[np.ndarray], float],
                         x: np.ndarray,
-                        T: Distribution,
+                        T: rv_continuous,
                         t: Callable[[int], float],
                         k_max: int) -> np.ndarray:
     """
@@ -87,7 +85,7 @@ def simulated_annealing(f: Callable[[np.ndarray], float],
     y = f(x)
     x_best, y_best = x, y
     for k in range(1, k_max + 1):
-        x_prime = x + T.rand()
+        x_prime = x + T.rvs()
         y_prime = f(x_prime)
         delta_y = y_prime - y
         if (delta_y <= 0) or (np.random.rand() < np.exp(-delta_y / t(k))):
@@ -179,10 +177,10 @@ def adaptive_simulated_annealing(f: Callable[[np.ndarray], float],
 
 
 def cross_entropy_method(f: Callable[[np.ndarray], float],
-                         P: Distribution,
+                         P: rv_continuous,
                          k_max: int,
                          m: int = 100,
-                         m_elite: int = 10) -> Distribution:
+                         m_elite: int = 10) -> rv_continuous:
     """
     The cross-entropy method, which takes an objective function `f` to
     be minimized, a proposal distribution `P`, an iteration count `k_max`,
@@ -191,7 +189,7 @@ def cross_entropy_method(f: Callable[[np.ndarray], float],
     global minimum is likely to exist.
     """
     for _ in range(k_max):
-        samples = P.rand(m)  # return shape (m, n), where n is dimension of random variable
+        samples = P.rvs(m)  # return shape (m, n), where n is dimension of random variable
         order = np.argsort(np.apply_along_axis(f, 1, samples))[0]
         P = type(P).fit(samples[order[:m_elite]])
     return P
@@ -259,8 +257,8 @@ def covariance_matrix_adaptation(f: Callable[[np.ndarray], float],
     E = np.sqrt(n) * (1 - (1/(4*n)) + (1/(21*(n**2))))
     p_sigma, p_Sigma, Sigma = np.zeros(n), np.zeros(n), np.eye(n)
     for k in range(1, k_max + 1):
-        P = MvNormal(mu, (sigma**2)*Sigma)
-        xs = P.rand(m)
+        P = multivariate_normal(mu, (sigma**2)*Sigma)
+        xs = P.rvs(m)
         ys = np.apply_along_axis(f, 1, xs)
         idcs = np.argsort(ys)  # best to worst
 

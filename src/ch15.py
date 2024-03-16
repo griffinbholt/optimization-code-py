@@ -2,9 +2,9 @@
 
 import numpy as np
 
+from scipy.stats import multivariate_normal
 from typing import Callable
 
-from Distributions import MvNormal
 
 
 def mu(X: np.ndarray, m: Callable[[np.ndarray], float]) -> np.ndarray:
@@ -33,8 +33,8 @@ def K(X: np.ndarray, X_prime: np.ndarray, k: Callable[[np.ndarray, np.ndarray], 
 
 def mvnrand(mu: np.ndarray, Sigma: np.ndarray, inflation: float = 1e-6) -> np.ndarray:
     """TODO"""
-    N = MvNormal(mu, Sigma + inflation*np.eye(len(mu)))
-    return N.rand()
+    N = multivariate_normal(mu, Sigma + inflation*np.eye(len(mu)))
+    return N.rvs()
 
 class GaussianProcess():
     """TODO"""

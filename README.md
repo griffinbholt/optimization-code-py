@@ -23,7 +23,7 @@ If you encounter any issues or have pressing comments, please [file an issue](ht
 |  5 | ▌▌▌▌▌▌▌▌▌▌ 100% | ▌▌▌▌▌▌▌▌▌▌ 100% | **Ready for use** |
 |  6 | ▌▌▌▌▌▌▌▌▌▌ 100% | ▌▌▌▌▌▌▌▌▌▌ 100% | **Ready for use** |
 |  7 | ▌▌▌▌▌▌▌▌▌▌ 100% | ▌▌▌▌▌▌▌ 70% | `Interval` and `Intervals` still need to be tested |
-|  8 | ▌▌▌▌▌▌▌▌▌▌ 100% | 0% | Needs to be tested |
+|  8 | ▌▌▌▌▌▌▌▌▌▌ 100% | ▌▌▌ 30% | `NoisyDescent`, `rand_positive_spanning_set`, and `mesh_adaptive_direct_search` have been tested. |
 |  9 | ▌▌▌▌▌▌▌▌▌▌ 100%  | 0% | Needs to be tested |
 | 10 | ▌▌▌▌▌▌▌▌▌▌ 100%  | 0% | Needs to be tested |
 | 11 | ▌▌▌▌▌▌▌▌▌▌ 100%  | 0% | Needs to be tested |
@@ -38,10 +38,9 @@ If you encounter any issues or have pressing comments, please [file an issue](ht
 | 20 | 0% | 0% | Need to figure out replacement library for `ExprRules.jl` |
 | 21 | ▌▌▌▌▌▌▌▌▌▌ 100%  | ▌▌▌▌▌▌▌▌▌▌ 100% | **Ready for use** |
 
-I have also written code for pertinent figures, examples, exercises through Chapter 6.
+I have also written code for pertinent figures, examples, exercises through Chapter 8.
 
-I have also written code for test functions (`TestFunctions.py`), convenience functions (`convenience.py`),
-and probability distributions with `fit` functionality (`Distributions.py`).
+I have also written code for test functions (`TestFunctions.py`) and convenience functions (`convenience.py`).
 
 <!-- TODO - I need to go through and check that all functions have proper parameter
 and return signatures. -->

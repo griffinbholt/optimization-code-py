@@ -2,10 +2,10 @@
 
 import numpy as np
 
+from scipy.stats import norm
 from typing import Callable
 
 from ch15 import GaussianProcess
-from Distributions import Normal
 
 
 def prob_of_improvement(y_min: float, mu: float, sigma: float) -> float:
@@ -13,7 +13,7 @@ def prob_of_improvement(y_min: float, mu: float, sigma: float) -> float:
     Computing the probability of improvement for a given best y value `y_min`,
     mean `mu`, and standard deviation `sigma`.
     """
-    return Normal(mu, sigma).cdf(y_min)
+    return norm(mu, sigma).cdf(y_min)
 
 
 def expected_improvement(y_min: float, mu: float, sigma: float) -> float:
@@ -22,7 +22,7 @@ def expected_improvement(y_min: float, mu: float, sigma: float) -> float:
     mean `mu`, and standard deviation `sigma`.
     """
     p_imp = prob_of_improvement(y_min, mu, sigma)
-    p_ymin = Normal(mu, sigma).pdf(y_min)
+    p_ymin = norm(mu, sigma).pdf(y_min)
     return (y_min - mu)*p_imp + (sigma**2)*p_ymin
 
 

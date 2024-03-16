@@ -4,8 +4,8 @@ import numpy as np
 
 from abc import ABC, abstractmethod
 from typing import Callable
+from scipy.stats import cauchy, multivariate_normal, rv_continuous
 
-from Distributions import Distribution, MvNormal, Cauchy
 from convenience import normalize
 
 
@@ -15,7 +15,7 @@ def rand_population_uniform(m: int, a: np.ndarray, b: np.ndarray) -> np.ndarray:
     uniform hyperrectangle with lower-bound vector `a` and upper-bound vector `b`.
     """
     d = len(a)
-    return a + np.random.rand(d) * (b - a)
+    return a + np.random.rand(m, d) * (b - a)
 
 
 def rand_population_normal(m: int, mu: np.ndarray, Sigma: np.ndarray) -> np.ndarray:
@@ -23,8 +23,8 @@ def rand_population_normal(m: int, mu: np.ndarray, Sigma: np.ndarray) -> np.ndar
     A method for sampling an initial population of `m` design points using a
     multivariate normal distribution with mean `mu` and covariance `Sigma`.
     """
-    D = MvNormal(mu, Sigma)
-    return D.rand(m)
+    D = multivariate_normal(mu, Sigma)
+    return D.rvs(m)
 
 
 def rand_population_cauchy(m: int, mu: np.ndarray, sigma: np.ndarray) -> np.ndarray:
@@ -35,7 +35,7 @@ def rand_population_cauchy(m: int, mu: np.ndarray, sigma: np.ndarray) -> np.ndar
     in a normal distribution.
     """
     n = len(mu)
-    return np.array([[Cauchy(mu[j], sigma[j]).rand() for j in range(n)] for _ in range(m)])
+    return np.array([[cauchy(mu[j], sigma[j]).rvs() for j in range(n)] for _ in range(m)])
 
 
 def genetic_algorithms(f: Callable[[np.ndarray], float],
@@ -265,13 +265,13 @@ def firefly(f: Callable[[np.ndarray], float],
     function `brightness`. The best design point is returned.
     """
     m = len(population[0])
-    N = MvNormal(np.zeros(m), np.eye(m))
+    N = multivariate_normal(np.zeros(m), np.eye(m))
     for _ in range(k_max):
         for a in population:
             for b in population:
                 if f(b) < f(a):
                     r = np.linalg.norm(b - a)
-                    a += beta * brightness(r) * (b - a) + alpha * N.rand()
+                    a += beta * brightness(r) * (b - a) + alpha * N.rvs()
     return population[np.argmin(np.apply_along_axis(f, 1, population))]
 
 
@@ -285,7 +285,7 @@ def cuckoo_search(f: Callable[[np.ndarray], float],
                   population: list[Nest],
                   k_max: int,
                   p_a: float = 0.1,
-                  C: Distribution = Cauchy(0, 1)) -> list[Nest]:
+                  C: rv_continuous = cauchy(0, 1)) -> list[Nest]:
     """
     Cuckoo search, which takes an objective function `f`, an initial set of
     nests `population`, a number of iterations `k_max`, percent of nests to
@@ -296,7 +296,7 @@ def cuckoo_search(f: Callable[[np.ndarray], float],
     a = round(m*p_a)
     for _ in range(k_max):
         i, j = np.random.randint(m, size=2)
-        x = population[j].x + C.rand(n)
+        x = population[j].x + C.rvs(n)
         y = f(x)
         if y < population[i].y:
             population[i].x = x
@@ -305,5 +305,5 @@ def cuckoo_search(f: Callable[[np.ndarray], float],
         p = np.argsort([-nest.y for nest in population])
         for i in range(len(a)):
             j = np.random.randint(m - a) + a
-            population[p[i]] = Nest(population[p[j]].x + C.rand(n), f(population[p[i]].x))
+            population[p[i]] = Nest(population[p[j]].x + C.rvs(n), f(population[p[i]].x))
     return population

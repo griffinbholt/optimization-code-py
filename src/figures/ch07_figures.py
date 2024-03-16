@@ -166,8 +166,8 @@ def figure_7_11():
         cont_ax.tick_params(axis="both", which="both", bottom=False, left=False, labelbottom=False, labelleft=False)
         cont_ax.set_xlabel(None)
         cont_ax.set_ylabel(None)
-        for triangle in triangles:
-            cont_ax.add_patch(Polygon(triangle, fill=False, ec="black"))
+        for k, triangle in enumerate(triangles):
+            cont_ax.add_patch(Polygon(triangle, fill=False, ec="black", alpha=0.75**(len(triangles) - k - 1)))
         p = np.argsort(y_arr)         # sort lowest to highest
         S, y_arr = S[p], y_arr[p]
         xl, yl = S[0], y_arr[0]       # lowest
