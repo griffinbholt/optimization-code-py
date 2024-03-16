@@ -2,11 +2,12 @@ import sys; sys.path.append('./src/'); sys.path.append('../')
 
 import matplotlib.pyplot as plt
 import numpy as np
+from scipy.stats import multivariate_normal
 
 from ch05 import GradientDescent
 from ch08 import NoisyDescent, rand_positive_spanning_set
-from TestFunctions import wheeler
-from convenience import plot_contour
+from TestFunctions import branin, wheeler
+from convenience import plot_contour, confidence_ellipse
 
 def figure_8_1():
     """
@@ -139,8 +140,40 @@ def figure_8_4():
     plt.title("Figure 8.4")
     plt.show()
 
+
+def figure_8_6():
+    """
+    Figure 8.6: The cross-entropy method with `m = 40` applied to the Branin
+    function (appendix B.3) using a multivariate Gaussian proposal distribution.
+    The 10 elite samples in each iteration are in red.
+    """
+    k_max = 4
+    P = multivariate_normal(np.array([3.0, 7.5]), 5*np.eye(2))
+    P_gen = multivariate_normal
+    m = 40
+    m_elite = 10
+    f = branin
+
+    fig = plt.figure(figsize=(20, 5))
+    xlim = (2*np.pi - 12, 2*np.pi + 12)
+    ylim = (-3, 22)
+    for i in range(1, k_max + 1):
+        ax = plot_contour(fig, branin, xlim, ylim, 0.01, 0.01, levels=[0, 1, 2, 3, 5, 10, 20, 50, 100], filled=True, subplot_coords=(1,k_max,i))
+        confidence_ellipse(P.mean, P.cov, ax, n_std=1, edgecolor='white')
+        confidence_ellipse(P.mean, P.cov, ax, n_std=2, edgecolor='white')
+        confidence_ellipse(P.mean, P.cov, ax, n_std=3, edgecolor='white')
+
+        samples = P.rvs(m)  # return shape (m, n), where n is dimension of random variable
+        ax.scatter(samples[:, 0], samples[:, 1], c='white', s=1.0)
+
+        order = np.argsort(np.apply_along_axis(f, 1, samples))
+        elite_samples = samples[order[:m_elite]]
+        ax.scatter(elite_samples[:, 0], elite_samples[:, 1], c='tab:red', s=1.0)
+        P = P_gen(*P_gen.fit(elite_samples))
+    plt.suptitle("Figure 8.6", y=0.8)
+    plt.show()
+
 # TODO - Figure 8.5
-# TODO - Figure 8.6
 # TODO - Figure 8.7
 # TODO - Figure 8.8
 # TODO - Figure 8.9
