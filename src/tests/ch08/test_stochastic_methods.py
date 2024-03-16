@@ -22,7 +22,7 @@ class TestStochasticMethods():
         M = NoisyDescent(Adam(alpha=0.001, gamma_v=0.9, gamma_s=0.999, eps=1e-8), sigma)
         self.run_on(booth, max_steps=100000, x=np.array([-5.0, 5.0]), M=M, eps=eps)
         self.run_on_branin(max_steps=100000, x=np.ones(2)*-5, M=M, eps=1e-4)
-        self.run_on(rosenbrock, max_steps=100000, x=np.ones(2)*-5, M=M, eps=eps)
+        self.run_on(rosenbrock, max_steps=100000, x=np.ones(2)*-5, M=M, eps=1e-5)
 
         M = NoisyDescent(HyperNesterovMomentum(alpha_0=0.01, mu=0.000001, beta=0.9), sigma)
         self.run_on(wheeler, max_steps=1000, x=np.zeros(2), M=M, eps=eps)

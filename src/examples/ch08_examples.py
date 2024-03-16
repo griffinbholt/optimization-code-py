@@ -77,5 +77,11 @@ def example_8_2():
     plt.suptitle("Example 8.2")
     plt.show()
 
+
+def example_8_3():
+    """Example 8.3: An example of using the cross-entropy method."""
+    # np.random
+    pass
+
 # TODO - Example 8.3
 # TODO - Example 8.4
