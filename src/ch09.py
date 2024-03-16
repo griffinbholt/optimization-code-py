@@ -38,12 +38,12 @@ def rand_population_cauchy(m: int, mu: np.ndarray, sigma: np.ndarray) -> np.ndar
     return np.array([[cauchy(mu[j], sigma[j]).rvs() for j in range(n)] for _ in range(m)])
 
 
-def genetic_algorithms(f: Callable[[np.ndarray], float],
-                       population: np.ndarray,
-                       k_max: int,
-                       S: 'SelectionMethod',
-                       C: 'CrossoverMethod',
-                       M: 'MutationMethod') -> np.ndarray:
+def genetic_algorithm(f: Callable[[np.ndarray], float],
+                      population: np.ndarray,
+                      k_max: int,
+                      S: 'SelectionMethod',
+                      C: 'CrossoverMethod',
+                      M: 'MutationMethod') -> np.ndarray:
     """
     The genetic algorithm, which takes an objective function `f`, an initial
     population `population`, number of iterations `k_max`, a `SelectionMethod` `S`,
@@ -52,7 +52,7 @@ def genetic_algorithms(f: Callable[[np.ndarray], float],
     for _ in range(k_max):
         parents = S.select(np.apply_along_axis(f, 1, population))
         children = [C.crossover(population[p[0]], population[p[1]]) for p in parents]
-        population = M.mutate(children)
+        population = [M.mutate(child) for child in children]
     return population[np.argmin(np.apply_along_axis(f, 1, population))]
 
 

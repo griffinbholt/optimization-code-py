@@ -12,7 +12,7 @@ I share this content in the hopes that it helps you and makes the decision makin
 
 If you encounter any issues or have pressing comments, please [file an issue](https://github.com/griffinbholt/optimization-code-py/issues/new/choose). (There are likely to still be bugs as I have not finished testing all of the classes and functions.)
 
-## Progress Update: (15 Mar 2024)
+## Progress Update: (16 Mar 2024)
 
 | Chapter(s) | Written | Tested | Notes |
 |--:|:--|:--|:--|
@@ -38,7 +38,7 @@ If you encounter any issues or have pressing comments, please [file an issue](ht
 | 20 | 0% | 0% | Need to figure out replacement library for `ExprRules.jl` |
 | 21 | ▌▌▌▌▌▌▌▌▌▌ 100%  | ▌▌▌▌▌▌▌▌▌▌ 100% | **Ready for use** |
 
-I have also written code for pertinent figures, examples, exercises through Chapter 8.
+I have also written code for pertinent figures, examples, exercises through Chapter 9.
 
 I have also written code for test functions (`TestFunctions.py`) and convenience functions (`convenience.py`).
 
