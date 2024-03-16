@@ -5,6 +5,7 @@ import numpy as np
 
 from scipy.stats import norm, multivariate_normal
 
+from ch08 import cross_entropy_method
 from TestFunctions import ackley
 
 
@@ -79,9 +80,20 @@ def example_8_2():
 
 
 def example_8_3():
-    """Example 8.3: An example of using the cross-entropy method."""
-    # np.random
-    pass
-
-# TODO - Example 8.3
-# TODO - Example 8.4
+    """
+    Example 8.3: An example of using the cross-entropy method.
+    
+    We can use `scipy.stats` classes to represent, sample from, and fit proposal
+    distributions. The parameter vector `theta` is replaced by a distribution `P`.
+    Calling `P.rvs(m)` will produce a m x n matrix corresponding to m samples of
+    n-dimensional samples from `P`, and calling `fit` will fit a new distribution
+    of the given generator type.
+    """
+    np.random.seed(0)
+    def f(x): return np.linalg.norm(x)
+    mu = np.array([0.5, 1.5])
+    Sigma = np.array([[1.0, 0.2], [0.2, 2.0]])
+    P = multivariate_normal(mu, Sigma)
+    k_max = 10
+    P = cross_entropy_method(f, P, multivariate_normal, k_max)
+    print("P.mu =", P.mean)

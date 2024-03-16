@@ -177,21 +177,22 @@ def adaptive_simulated_annealing(f: Callable[[np.ndarray], float],
 
 
 def cross_entropy_method(f: Callable[[np.ndarray], float],
-                         P: rv_continuous,
+                         P: rv_continuous,      # NOTE: Bad typing by scipy; it's a frozen distribution
+                         P_gen: rv_continuous,  # NOTE: Bad typing by scipy; it's a generator for a distribution
                          k_max: int,
                          m: int = 100,
                          m_elite: int = 10) -> rv_continuous:
     """
     The cross-entropy method, which takes an objective function `f` to
-    be minimized, a proposal distribution `P`, an iteration count `k_max`,
-    a sample size `m`, and the number of samples to use when refitting the
-    distribution `m_elite`. It returns the updated distribution over where the
-    global minimum is likely to exist.
+    be minimized, a proposal distribution `P` with distribution generator
+    `P_gen`, an iteration count `k_max`, a sample size `m`, and the number of
+    samples to use when refitting the distribution `m_elite`. It returns the
+    updated distribution over where the global minimum is likely to exist.
     """
     for _ in range(k_max):
         samples = P.rvs(m)  # return shape (m, n), where n is dimension of random variable
-        order = np.argsort(np.apply_along_axis(f, 1, samples))[0]
-        P = type(P).fit(samples[order[:m_elite]])
+        order = np.argsort(np.apply_along_axis(f, 1, samples))
+        P = P_gen(*P_gen.fit(samples[order[:m_elite]]))
     return P
 
 
