@@ -12,7 +12,7 @@ I share this content in the hopes that it helps you and makes the decision makin
 
 If you encounter any issues or have pressing comments, please [file an issue](https://github.com/griffinbholt/optimization-code-py/issues/new/choose). (There are likely to still be bugs as I have not finished testing all of the classes and functions.)
 
-## Progress Update: (16 Mar 2024)
+## Progress Update: (19 Mar 2024)
 
 | Chapter(s) | Written | Tested | Notes |
 |--:|:--|:--|:--|
@@ -22,7 +22,7 @@ If you encounter any issues or have pressing comments, please [file an issue](ht
 |  4 | ▌▌▌▌▌▌▌▌▌▌ 100% | ▌▌▌▌▌▌▌▌▌▌ 100% | **Ready for use** |
 |  5 | ▌▌▌▌▌▌▌▌▌▌ 100% | ▌▌▌▌▌▌▌▌▌▌ 100% | **Ready for use** |
 |  6 | ▌▌▌▌▌▌▌▌▌▌ 100% | ▌▌▌▌▌▌▌▌▌▌ 100% | **Ready for use** |
-|  7 | ▌▌▌▌▌▌▌▌▌▌ 100% | ▌▌▌▌▌▌▌ 70% | `Interval` and `Intervals` still need to be tested |
+|  7 | ▌▌▌▌▌▌▌▌▌▌ 100% | ▌▌▌▌▌▌▌▌▌▌ 100% | **Ready for use** |
 |  8 | ▌▌▌▌▌▌▌▌▌▌ 100% | ▌▌▌▌ 40% | `NoisyDescent`, `rand_positive_spanning_set`, `mesh_adaptive_direct_search`, and `simulated_annealing` have been tested. |
 |  9 | ▌▌▌▌▌▌▌▌▌▌ 100%  | 0% | Needs to be tested |
 | 10 | ▌▌▌▌▌▌▌▌▌▌ 100%  | 0% | Needs to be tested |
