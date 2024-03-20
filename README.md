@@ -23,7 +23,7 @@ If you encounter any issues or have pressing comments, please [file an issue](ht
 |  5 | ▌▌▌▌▌▌▌▌▌▌ 100% | ▌▌▌▌▌▌▌▌▌▌ 100% | **Ready for use** |
 |  6 | ▌▌▌▌▌▌▌▌▌▌ 100% | ▌▌▌▌▌▌▌▌▌▌ 100% | **Ready for use** |
 |  7 | ▌▌▌▌▌▌▌▌▌▌ 100% | ▌▌▌▌▌▌▌▌▌▌ 100% | **Ready for use** |
-|  8 | ▌▌▌▌▌▌▌▌▌▌ 100% | ▌▌▌▌ 40% | `NoisyDescent`, `rand_positive_spanning_set`, `mesh_adaptive_direct_search`, and `simulated_annealing` have been tested. |
+|  8 | ▌▌▌▌▌▌▌▌▌▌ 100% | ▌▌▌▌▌▌▌ 70% | `adaptive_simulated_annealing`, `natural_evolution_strategies`, and `covariance_matrix_adaptation` need to be tested |
 |  9 | ▌▌▌▌▌▌▌▌▌▌ 100%  | 0% | Needs to be tested |
 | 10 | ▌▌▌▌▌▌▌▌▌▌ 100%  | 0% | Needs to be tested |
 | 11 | ▌▌▌▌▌▌▌▌▌▌ 100%  | 0% | Needs to be tested |

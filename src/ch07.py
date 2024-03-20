@@ -236,6 +236,7 @@ class Interval():
                         c - (3.0**(-d-1)) * basis(i, n)] for i in dirs])
         vs = np.apply_along_axis(f, 2, cs)
         minvals = np.min(vs, axis=1)
+        minvals = minvals[0] if n == 1 else minvals
 
         intervals = []
         depths = np.copy(self.depths)

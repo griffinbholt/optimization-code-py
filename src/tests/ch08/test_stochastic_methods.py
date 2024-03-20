@@ -87,17 +87,39 @@ class TestStochasticMethods():
                 x_best, y_best = x, ackley(x)
         assert y_best < 0.15
 
-    def test_corana_update(self):
-        pass
-
     def test_adaptive_simulated_annealing(self):
         pass
 
-    def test_cross_entropy_method(self):
-        pass
+    def test_cross_entropy_method(self, eps=1e-5):
+        f_min, x_min = branin.global_min()
+        P = multivariate_normal(np.array([3.0, 7.5]), 5*np.eye(2))
+        try_again = True
+        while try_again:
+            try:
+                P = cross_entropy_method(branin, P, k_max=100)
+                try_again = False
+            except Exception as e:
+                print(e)
+        x = P.mean
+        assert np.abs(branin(x) - f_min[0]) < eps
+        assert np.any([np.all(np.abs(x - x_min_i) < eps) for x_min_i in x_min.T])
+
+        f_min, x_min = booth.global_min()
+        P = multivariate_normal(np.array([-0.0, -0.0]), 10*np.eye(2))
+        try_again = True
+        while try_again:
+            try:
+                P = cross_entropy_method(booth, P, k_max=10)
+                try_again = False
+            except Exception as e:
+                print(e)
+        x = P.mean
+        assert np.abs(booth(x) - f_min) < eps
+        assert np.all(np.abs(x - x_min) < eps)  
 
     def test_natural_evolution_strategies(self):
         pass
 
     def test_covariance_matrix_adaptation(self):
         pass
+
